@@ -31,7 +31,24 @@ function selectOperators(id) {
         selectArithmetic(id);
     } else if (id == 'equals') {
         equals();
+    } else if (id == 'point') {
+        selectDecimal();
     }
+}
+
+function selectDecimal() {
+    if (!hasPoint()) {
+        input += '.';
+        setLocalStorage();
+        setHTMLOfInput();
+    }
+}
+
+function hasPoint() {
+    for (let i = 0; i < input.length; ++i) {
+        if (input.charAt(i) == '.') return true;
+    }
+    return false;
 }
 
 function equals() {
@@ -99,7 +116,7 @@ function selectNumber(numberID) {
         result += ` ${input}`;
         input = numberID.toString();
     } else {
-        input = (input == 0) ? numberID.toString() : (input + numberID.toString());
+        input = (input == 0 && input.charAt(input.length - 1) != '.') ? numberID.toString() : (input + numberID.toString());
     }
     setLocalAndHTML();
 }
@@ -128,8 +145,11 @@ function handleOnBackspace() {
     const lastCharactersCode = input.charCodeAt(input.length - 1);
     if (lastCharactersCode >= 48 && lastCharactersCode <= 57) {
         clearDigit(lastCharactersCode);
+    } else if(lastCharactersCode == 46) {
+        input = input.substring(0, input.length - 1);
+        localStorage.setItem('input', input);
+        setHTMLOfInput();
     }
-    //Udalenie arithmetic operatora s resulta posle dobavlenie arithmetica
 }
 
 function handleOnClearAll() {
@@ -164,3 +184,4 @@ function setHTMLOfResult() {
 }
 
 document.addEventListener('click', handleOnClick);
+
