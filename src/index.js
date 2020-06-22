@@ -26,9 +26,30 @@ function handleOnClick(event) {
 }
 
 function selectNumber(numberID) {
-    input = (input == 0) ? numberID.toString() : (input + numberID.toString());
-    document.querySelector('.input').innerHTML = input;
-    localStorage.setItem('input', input);
+    if (isArithmetic(input)) {
+        result += ` ${input}`;
+        input = numberID.toString();
+        setLocalStorage();
+        setHTMLOfInput();
+        setHTMLOfResult();
+    } else {
+        input = (input == 0) ? numberID.toString() : (input + numberID.toString());
+    }
+    setLocalStorage();
+    setHTMLOfInput();
+    setHTMLOfResult();
+}
+
+function isArithmetic(item) {
+    switch(item) {
+        case "+":
+        case "-":
+        case "%":
+        case "×":
+        case "÷":
+            return true;
+    }
+    return false;
 }
 
 function selectClear(clearID) {
@@ -52,9 +73,6 @@ function clearDigit() {
     document.querySelector('.input').innerHTML = input;
 }
 
-
-document.addEventListener('click', handleOnClick);
-
 function setLocalStorage() {
     localStorage.setItem('result', result);
     localStorage.setItem('input', input);
@@ -67,3 +85,5 @@ function setHTMLOfInput() {
 function setHTMLOfResult() {
     document.querySelector('.result').innerHTML = "Ans = " + result;
 }
+
+document.addEventListener('click', handleOnClick);
