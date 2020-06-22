@@ -10,7 +10,6 @@ if (localStorage.getItem('result')) {
     localStorage.setItem('result', result);
     localStorage.setItem('input', input);
 }
-
 document.querySelector('.result').innerHTML = result;
 document.querySelector('.input').innerHTML = input;
 
@@ -22,17 +21,35 @@ function handleOnClick(event) {
     } else if (className.includes('operators')) {
         //do something
     } else if (className.includes('clear')){
-        //selectClear(id);
+        selectClear(id);
     }
 }
 
-
 function selectNumber(numberID) {
-    if (+input) {
-        input += numberID.toString();
-        document.querySelector('.input').innerHTML = input;
-        localStorage.setItem('input', input);
+    input = (input == 0) ? numberID.toString() : (input + numberID.toString());
+    document.querySelector('.input').innerHTML = input;
+    localStorage.setItem('input', input);
+}
+
+function selectClear(clearID) {
+    if(clearID == 'backspace') {
+        handleOnBackspace();
+    } else {
+        //handleOnClearAll();
     }
+}
+
+function handleOnBackspace() {
+    const lastCharactersCode = input.charCodeAt(input.length - 1)
+    if (lastCharactersCode >= 48 && lastCharactersCode <= 57) {
+        clearDigit(lastCharactersCode);
+    }
+}
+
+function clearDigit() {
+    input = (input.length > 1) ? input.substring(0, input.length - 1) : "0";
+    localStorage.setItem('input', input);
+    document.querySelector('.input').innerHTML = input;
 }
 
 
