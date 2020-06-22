@@ -18,24 +18,22 @@ function handleOnClick(event) {
     const id = event.target.id;
     const className = event.target.className;
     if (className.includes('number')) {
-        typeNumber(id);
+        selectNumber(id);
     } else if (className.includes('operators')) {
         //do something
     } else if (className.includes('clear')){
-        //do something
+        //selectClear(id);
     }
 }
+
+
+function selectNumber(numberID) {
+    if (+input) {
+        input += numberID.toString();
+        document.querySelector('.input').innerHTML = input;
+        localStorage.setItem('input', input);
+    }
+}
+
 
 document.addEventListener('click', handleOnClick);
-
-
-function typeNumber(number) {
-    if (!(+input)) {
-        input = number.toString();
-    } else {
-        input += number.toString();
-    }
-    document.querySelector('.input').innerHTML = input;
-    localStorage.setItem('input', input);
-}
-
