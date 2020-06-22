@@ -2,16 +2,16 @@ let result;
 let input;
 
 if (localStorage.getItem('result')) {
-    result = "Ans = " + localStorage.getItem('result');
+    result = localStorage.getItem('result');
     input = localStorage.getItem('input') || "0";
 } else {
     result = "";
     input = "0";
-    localStorage.setItem('result', result);
-    localStorage.setItem('input', input);
+    setLocalStorage();
 }
-document.querySelector('.result').innerHTML = result;
-document.querySelector('.input').innerHTML = input;
+
+setHTMLOfResult();
+setHTMLOfInput();
 
 function handleOnClick(event) {
     const id = event.target.id;
@@ -54,3 +54,16 @@ function clearDigit() {
 
 
 document.addEventListener('click', handleOnClick);
+
+function setLocalStorage() {
+    localStorage.setItem('result', result);
+    localStorage.setItem('input', input);
+}
+
+function setHTMLOfInput() {
+    document.querySelector('.input').innerHTML = input;
+}
+
+function setHTMLOfResult() {
+    document.querySelector('.result').innerHTML = "Ans = " + result;
+}
