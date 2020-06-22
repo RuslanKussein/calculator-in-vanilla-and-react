@@ -26,6 +26,45 @@ function handleOnClick(event) {
     }
 }
 
+function handleOnKeyDown(event) {
+    if (event.shiftKey) {
+        switch (event.keyCode) {
+            case 53:
+                selectOperators("percentage");
+                break;
+            case 56:
+                selectOperators("multiplication");
+                break;
+            case 187:
+                selectOperators('addition');
+        }
+    } else {
+        if (event.keyCode >= 48 && event.keyCode <= 57) {
+            selectNumber(event.key);
+        } else {
+            switch (event.keyCode) {
+                case 189:
+                    selectOperators("subtraction");
+                    break;
+                case 191:
+                    selectOperators("division");
+                    break;
+                case 187:
+                    selectOperators("equals");
+                    break;
+                case 8:
+                    selectClear("backspace");
+                    break;
+                case 27:
+                    selectClear("clear-all");
+                    break;
+                case 190:
+                    selectOperators("point");
+            }
+        }
+    }
+}
+
 function selectOperators(id) {
     if (document.getElementById(`${id}`).className.includes('arithmetic')) {
         selectArithmetic(id);
@@ -193,3 +232,6 @@ function setHTMLOfResult() {
 
 document.addEventListener('click', handleOnClick);
 
+window.addEventListener('keydown', (event) => {
+    handleOnKeyDown(event);
+});
