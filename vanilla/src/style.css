@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.screen {
+    background-color: rgb(128, 128, 128);
+    width:28vw;
+    margin:auto;
+    text-align: right;
+}
+.buttons-container {
+    display: grid;
+    grid-template-columns: 7vw 7vw 7vw 7vw;
+    justify-content: center;
+}
+
+.operators {
+
+}
+
