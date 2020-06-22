@@ -5,7 +5,7 @@ if (localStorage.getItem('result')) {
     result = localStorage.getItem('result');
     input = localStorage.getItem('input') || "0";
 } else {
-    result = "";
+    result = "0";
     input = "0";
     setLocalStorage();
 }
@@ -56,21 +56,29 @@ function selectClear(clearID) {
     if(clearID == 'backspace') {
         handleOnBackspace();
     } else {
-        //handleOnClearAll();
+        handleOnClearAll();
     }
 }
 
 function handleOnBackspace() {
-    const lastCharactersCode = input.charCodeAt(input.length - 1)
+    const lastCharactersCode = input.charCodeAt(input.length - 1);
     if (lastCharactersCode >= 48 && lastCharactersCode <= 57) {
         clearDigit(lastCharactersCode);
     }
 }
 
+function handleOnClearAll() {
+    result = "0";
+    input = "0";
+    setLocalStorage();
+    setHTMLOfInput();
+    setHTMLOfResult();
+}
+
 function clearDigit() {
     input = (input.length > 1) ? input.substring(0, input.length - 1) : "0";
     localStorage.setItem('input', input);
-    document.querySelector('.input').innerHTML = input;
+    setHTMLOfInput();
 }
 
 function setLocalStorage() {
