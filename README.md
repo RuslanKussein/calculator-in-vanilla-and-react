@@ -4,5 +4,5 @@
 - HTML, CSS, JavaScript(ES6+)
 
 # Demo
-[Click it to watch live](https://ruslankussein.github.io/calculator-in-vanilla-js/)
+☞ [Click it to watch live](https://ruslankussein.github.io/calculator-in-vanilla-js/)
 
