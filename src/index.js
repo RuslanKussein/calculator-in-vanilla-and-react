@@ -10,6 +10,7 @@ if (localStorage.getItem('result')) {
     setLocalStorage();
 }
 
+
 setHTMLOfResult();
 setHTMLOfInput();
 
@@ -28,7 +29,61 @@ function handleOnClick(event) {
 function selectOperators(id) {
     if (document.getElementById(`${id}`).className.includes('arithmetic')) {
         selectArithmetic(id);
+    } else if (id == 'equals') {
+        equals();
     }
+}
+
+function equals() {
+    const arithmetic = result.charAt(result.length - 1);
+    if (isArithmetic(arithmetic)) {
+        switch(arithmetic) {
+            case '+':
+                doAddition();
+                break;
+            case '-':
+                doSubtraction();
+                break;
+            case '×':
+                doMultiplication();
+                break;
+            case '÷':
+                doDivision();
+                break;
+            case '%':
+                doPercentage();
+        }
+    }
+}
+
+function doAddition() {
+    result = parseInt(result) + parseInt(input);
+    input = "0";
+    setLocalAndHTML();
+}
+
+function doSubtraction() {
+    result = parseInt(result) - parseInt(input);
+    input = "0";
+    setLocalAndHTML();
+}
+
+function doMultiplication() {
+    result = parseInt(result) * parseInt(input);
+    input = "0";
+    setLocalAndHTML();
+}
+
+function doDivision() {
+    result = parseInt(result) / parseInt(input);
+    input = "0";
+    setLocalAndHTML();
+}
+
+function doPercentage() {
+    result = (parseInt(result) * parseInt(input)) / 100;
+    input = "0";
+    setLocalAndHTML();
 }
 
 function selectArithmetic(id) {
@@ -43,15 +98,10 @@ function selectNumber(numberID) {
     if (isArithmetic(input)) {
         result += ` ${input}`;
         input = numberID.toString();
-        setLocalStorage();
-        setHTMLOfInput();
-        setHTMLOfResult();
     } else {
         input = (input == 0) ? numberID.toString() : (input + numberID.toString());
     }
-    setLocalStorage();
-    setHTMLOfInput();
-    setHTMLOfResult();
+    setLocalAndHTML();
 }
 
 function isArithmetic(item) {
@@ -85,15 +135,19 @@ function handleOnBackspace() {
 function handleOnClearAll() {
     result = "0";
     input = "0";
-    setLocalStorage();
-    setHTMLOfInput();
-    setHTMLOfResult();
+    setLocalAndHTML();
 }
 
 function clearDigit() {
     input = (input.length > 1) ? input.substring(0, input.length - 1) : "0";
     localStorage.setItem('input', input);
     setHTMLOfInput();
+}
+
+function setLocalAndHTML() {
+    setLocalStorage();
+    setHTMLOfInput();
+    setHTMLOfResult();
 }
 
 function setLocalStorage() {
