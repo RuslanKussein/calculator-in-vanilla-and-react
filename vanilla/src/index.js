@@ -18,7 +18,7 @@ function handleOnClick(event) {
     const id = event.target.id;
     const className = event.target.className;
     if (className.includes('number')) {
-        //do something
+        typeNumber(id);
     } else if (className.includes('operators')) {
         //do something
     } else if (className.includes('clear')){
@@ -27,4 +27,15 @@ function handleOnClick(event) {
 }
 
 document.addEventListener('click', handleOnClick);
+
+
+function typeNumber(number) {
+    if (!(+input)) {
+        input = number.toString();
+    } else {
+        input += number.toString();
+    }
+    document.querySelector('.input').innerHTML = input;
+    localStorage.setItem('input', input);
+}
 
