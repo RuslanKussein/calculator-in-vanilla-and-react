@@ -33,7 +33,15 @@ function selectOperators(id) {
         equals();
     } else if (id == 'point') {
         selectDecimal();
+    } else if (id == "plus-minus") {
+        selectPlusMinus();
     }
+}
+
+function selectPlusMinus() {
+    input = (input.charAt(0) == '-') ? input.substring(1) : `-${input}`;
+    setLocalStorage();
+    setHTMLOfInput();
 }
 
 function selectDecimal() {
