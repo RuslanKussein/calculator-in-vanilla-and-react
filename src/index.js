@@ -19,9 +19,23 @@ function handleOnClick(event) {
     if (className.includes('number')) {
         selectNumber(id);
     } else if (className.includes('operators')) {
-        //do something
+        selectOperators(id);
     } else if (className.includes('clear')){
         selectClear(id);
+    }
+}
+
+function selectOperators(id) {
+    if (document.getElementById(`${id}`).className.includes('arithmetic')) {
+        selectArithmetic(id);
+    }
+}
+
+function selectArithmetic(id) {
+    if (input.length == 1 && (input == 0 || isArithmetic(document.getElementById(`${id}`).innerHTML))) {
+        input = document.getElementById(`${id}`).innerHTML;
+        setHTMLOfInput();
+        setLocalStorage();
     }
 }
 
@@ -65,6 +79,7 @@ function handleOnBackspace() {
     if (lastCharactersCode >= 48 && lastCharactersCode <= 57) {
         clearDigit(lastCharactersCode);
     }
+    //Udalenie arithmetic operatora s resulta posle dobavlenie arithmetica
 }
 
 function handleOnClearAll() {
